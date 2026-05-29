@@ -9,3 +9,6 @@ dist/
 .env
 .DS_Store
 postgres-data/
+generated/
+Flow.pdf
+Report.pdf

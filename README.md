@@ -1,6 +1,6 @@
 # Inventory Nexus
 
-Production-oriented inventory management, dashboarding, and AI planning app.
+Inventory Nexus is a inventory management and decision intelligence platform with a React dashboard, a FastAPI backend, and PostgreSQL-ready data models—built for client-ready demos and future enterprise deployments. The system exposes stable AI planning and analytics workflows today (with deterministic endpoints) while keeping a clear path for trained forecasting, churn prediction, and recommendations.
 
 ## What is included
 
@@ -40,6 +40,10 @@ source .venv/bin/activate
 pip install -r requirements.txt
 pytest
 ```
+
+`backend/requirements.txt` is fully pinned, including transitive packages, to avoid dependency resolver drift during testing. The current verified backend environment uses Python 3.14 locally; Docker uses Python 3.11 slim.
+
+The frontend top-level dependencies are pinned in `frontend/package.json`, and the resolved npm tree is captured in `frontend/package-lock.json`.
 
 ## AI and ML roadmap
 
