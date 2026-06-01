@@ -4,8 +4,8 @@ Inventory Nexus is a inventory management and decision intelligence platform wit
 
 ## What is included
 
-- React dashboard for inventory operations, reorder queues, demand forecasts, and customer segmentation.
-- FastAPI backend with JWT auth, SQLAlchemy models, product CRUD, stock movement controls, analytics, and ML-ready endpoints.
+- React dashboard for inventory operations, reorder queues, demand forecasts, and customer segmentations.
+- FastAPI backend with JWT auth, SQLAlchemy models, product CRUD, stock movement controls, analytics, and ML endpoints.
 - PostgreSQL-ready Docker Compose stack.
 - Seed importer for the customer mart dataset in `Multi source Customer Mart for Female Recommendati`.
 
@@ -49,11 +49,11 @@ The frontend top-level dependencies are pinned in `frontend/package.json`, and t
 
 The current app includes deterministic AI-planning endpoints so the dashboard works immediately. The intended production roadmap is:
 
-1. Demand forecasting: replace the baseline movement-history method with SKU-level time-series models and promotion/seasonality features.
-2. Reorder optimization: combine forecast demand, supplier lead time, reliability, inventory carrying cost, and stockout penalty.
-3. Customer intelligence: train churn, CLV, and next-best-offer models from the imported customer mart.
-4. Recommendation engine: use customer RFM, product/category affinity, and product embeddings for personalized recommendations.
-5. AI assistant: expose safe, schema-aware analytics tools over PostgreSQL and apply role-level access rules before allowing natural language analysis.
+1. Demand forecasting: Replace the baseline movement-history method with SKU-level time-series models and promotion/seasonality features.
+2. Reorder optimization: Combine forecast demand, supplier lead time, reliability, inventory carrying cost, and stockout penalty.
+3. Customer intelligence: Train churn, CLV, and next-best-offer models from the imported customer mart.
+4. Recommendation engine: Use customer RFM, product/category affinity, and product embeddings for personalized recommendations.
+5. AI assistant: Expose safe, schema-aware analytics tools over PostgreSQL and apply role-level access rules before allowing natural language analysis.
 
 ## Reference basis
 

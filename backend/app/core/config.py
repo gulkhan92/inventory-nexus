@@ -4,7 +4,7 @@ from typing import Literal
 from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-
+# base class
 class Settings(BaseSettings):
     app_name: str = "Inventory Nexus"
     environment: Literal["local", "test", "staging", "production"] = "local"
