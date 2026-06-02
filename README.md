@@ -72,6 +72,10 @@ VITE_SUPERSET_DASHBOARD_ID=<embedded-dashboard-uuid>
 
 The React app requests Superset guest tokens through FastAPI. Do not request Superset guest tokens directly from browser code.
 
+Backend guest-token endpoint:
+- `GET /api/v1/superset/guest-token`
+- The Superset internal API call uses `.../api/v1/security/guest_token` (no trailing slash).
+
 ## Local backend checks
 
 ```bash
