@@ -68,6 +68,8 @@ For embedded dashboards, enable embedding from the Superset dashboard menu, allo
 ```text
 SUPERSET_DASHBOARD_ID=<embedded-dashboard-uuid>
 VITE_SUPERSET_DASHBOARD_ID=<embedded-dashboard-uuid>
+
+Note: If `SUPERSET_DASHBOARD_ID` is not set, FastAPI will return HTTP 503 for the guest-token endpoint.
 ```
 
 The React app requests Superset guest tokens through FastAPI. Do not request Superset guest tokens directly from browser code.
