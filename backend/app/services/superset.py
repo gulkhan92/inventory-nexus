@@ -38,12 +38,15 @@ def create_guest_token(user: User) -> str:
             )
 
         guest_response = client.post(
-            "/api/v1/security/guest_token/",
+            "/api/v1/security/guest_token",
             headers={"Authorization": f"Bearer {access_token}"},
             json={
-                "resources": [{"type": "dashboard", "id": settings.superset_dashboard_id}],
+                "resources": [
+                    {"type": "dashboard", "id": settings.superset_dashboard_id}
+                ],
                 "rls": [],
                 "user": {
+                    # Superset uses 'username' as the identity key in some setups.
                     "username": user.email,
                     "first_name": user.full_name,
                     "last_name": "",
@@ -51,14 +54,28 @@ def create_guest_token(user: User) -> str:
             },
         )
         if guest_response.status_code >= 400:
+            # Include response text to make debugging configuration/token issues easier.
+            detail = (
+                "Unable to create Superset guest token: "
+                f"status={guest_response.status_code}, body={guest_response.text[:1000]}"
+            )
             raise HTTPException(
                 status_code=status.HTTP_502_BAD_GATEWAY,
-                detail="Unable to create Superset guest token",
+                detail=detail,
             )
-        token = guest_response.json().get("token")
+
+        try:
+            payload = guest_response.json()
+        except Exception:
+            raise HTTPException(
+                status_code=status.HTTP_502_BAD_GATEWAY,
+                detail=f"Superset guest token response was not valid JSON: {guest_response.text[:1000]}",
+            )
+
+        token = payload.get("token")
         if not token:
             raise HTTPException(
                 status_code=status.HTTP_502_BAD_GATEWAY,
-                detail="Superset guest token response did not include a token",
+                detail=f"Superset guest token response did not include a token. Body={guest_response.text[:1000]}",
             )
         return token
