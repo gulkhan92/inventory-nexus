@@ -25,11 +25,52 @@ Open:
 
 - Frontend: http://localhost:5173
 - API docs: http://localhost:8000/docs
+- Apache Superset: http://localhost:8088
 
 Default seeded login:
 
 - Email: `admin@inventory-nexus.example.com`
 - Password: `ChangeMe123!`
+
+Default local Superset login:
+
+- Username: `admin`
+- Password: `admin`
+
+## Apache Superset
+
+Inventory Nexus includes Apache Superset as the BI and embedded analytics layer. Superset has its own metadata database and reads the application PostgreSQL database through curated analytics views.
+
+Start the full stack:
+
+```bash
+docker compose up --build
+docker compose exec backend python scripts/seed.py
+```
+
+In Superset, add a PostgreSQL database connection using:
+
+```text
+postgresql://inventory:inventory@postgres:5432/inventory_nexus
+```
+
+Recommended datasets are in the `analytics` schema:
+
+- `analytics.inventory_snapshot_v`
+- `analytics.reorder_queue_v`
+- `analytics.stock_movements_v`
+- `analytics.supplier_scorecard_v`
+- `analytics.customer_segments_v`
+- `analytics.customer_region_summary_v`
+
+For embedded dashboards, enable embedding from the Superset dashboard menu, allow the frontend origin, copy the dashboard embedded UUID, then set both:
+
+```text
+SUPERSET_DASHBOARD_ID=<embedded-dashboard-uuid>
+VITE_SUPERSET_DASHBOARD_ID=<embedded-dashboard-uuid>
+```
+
+The React app requests Superset guest tokens through FastAPI. Do not request Superset guest tokens directly from browser code.
 
 ## Local backend checks
 

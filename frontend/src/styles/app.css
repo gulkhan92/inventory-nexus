@@ -44,15 +44,26 @@ input {
   gap: 8px;
 }
 
-.sidebar a {
+.sidebar a,
+.sidebar button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  border: 0;
+  text-align: left;
+  font: inherit;
   color: #b8c4cc;
   padding: 12px 14px;
   border-radius: 8px;
   cursor: default;
+  background: transparent;
 }
 
 .sidebar a.active,
-.sidebar a:hover {
+.sidebar a:hover,
+.sidebar button.active,
+.sidebar button:hover {
   background: #1f3a42;
   color: #fff;
 }
@@ -291,6 +302,105 @@ th {
   color: #334155;
   background: #eef2f5;
   font-weight: 700;
+}
+
+.analytics-panel {
+  min-height: calc(100vh - 56px);
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+  gap: 14px;
+}
+
+.analytics-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 18px;
+}
+
+.analytics-header p,
+.analytics-empty p {
+  margin: 0 0 6px;
+  color: #667781;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.analytics-header h1,
+.analytics-empty h2 {
+  margin: 0;
+  letter-spacing: 0;
+}
+
+.analytics-header span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #0f766e;
+  font-weight: 700;
+}
+
+.analytics-warning {
+  padding: 12px 14px;
+  background: #fff7ed;
+  border: 1px solid #fed7aa;
+  border-radius: 8px;
+  color: #9a3412;
+  font-weight: 700;
+}
+
+.superset-frame {
+  min-height: 720px;
+  background: #fff;
+  border: 1px solid #dce4ea;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.superset-frame iframe {
+  width: 100%;
+  min-height: 720px;
+  border: 0;
+}
+
+.analytics-empty {
+  min-height: calc(100vh - 56px);
+  display: grid;
+  place-items: center;
+  text-align: center;
+}
+
+.analytics-empty > div {
+  max-width: 640px;
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+  padding: 42px;
+  background: #fff;
+  border: 1px solid #dce4ea;
+  border-radius: 8px;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06);
+}
+
+.analytics-empty p {
+  max-width: 560px;
+  text-transform: none;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+.analytics-empty a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 14px;
+  border-radius: 8px;
+  background: #102026;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 800;
 }
 
 @media (max-width: 1100px) {

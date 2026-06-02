@@ -7,6 +7,7 @@ from sqlalchemy.orm import Session
 from app.core.config import get_settings
 from app.core.security import get_password_hash
 from app.models.domain import Category, CustomerSegment, Product, StockItem, Supplier, User, Warehouse
+from app.services.reporting import ensure_reporting_views
 
 
 def seed_database(db: Session) -> dict[str, int]:
@@ -26,6 +27,7 @@ def seed_database(db: Session) -> dict[str, int]:
     products = _ensure_products(db, categories, suppliers)
     _ensure_stock(db, products, warehouses)
     customers_imported = _import_customer_mart(db)
+    ensure_reporting_views(db)
     db.commit()
     return {"products": len(products), "customers_imported": customers_imported}
 

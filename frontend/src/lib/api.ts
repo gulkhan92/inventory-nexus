@@ -51,6 +51,13 @@ export type CustomerInsight = {
   top_regions: Array<{ region: string; customers: number; avg_monetary: number }>;
 };
 
+export type SupersetGuestToken = {
+  token: string;
+};
+
+export const supersetDomain = import.meta.env.VITE_SUPERSET_DOMAIN ?? "http://localhost:8088";
+export const supersetDashboardId = import.meta.env.VITE_SUPERSET_DASHBOARD_ID ?? "";
+
 export async function login(email: string, password: string): Promise<string> {
   const response = await fetch(`${API_BASE_URL}/auth/login`, {
     method: "POST",

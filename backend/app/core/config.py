@@ -16,6 +16,10 @@ class Settings(BaseSettings):
     secret_key: str = "change-me-before-production"
     access_token_expire_minutes: int = 60
     cors_origins: str = "http://localhost:5173,http://127.0.0.1:5173"
+    superset_base_url: str = "http://localhost:8088"
+    superset_username: str = "admin"
+    superset_password: str = "admin"
+    superset_dashboard_id: str = ""
     seed_csv_path: str = (
         "../Multi source Customer Mart for Female Recommendati/MultiSource_Female_CustMart.csv"
     )

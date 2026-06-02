@@ -89,3 +89,7 @@ class CustomerInsight(BaseModel):
     churn_rate: float
     high_value_customers: int
     top_regions: list[dict[str, str | int | float]]
+
+
+class SupersetGuestToken(BaseModel):
+    token: str

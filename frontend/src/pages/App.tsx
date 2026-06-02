@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { AlertTriangle, Boxes, BrainCircuit, CircleDollarSign, PackageCheck, Search, ShieldCheck, Users } from "lucide-react";
+import { AlertTriangle, BarChart3, Boxes, BrainCircuit, CircleDollarSign, PackageCheck, Search, ShieldCheck, Users } from "lucide-react";
 import {
   CustomerInsight,
   DashboardMetrics,
@@ -11,12 +11,14 @@ import {
 } from "../lib/api";
 import { DataTable } from "../components/DataTable";
 import { MetricCard } from "../components/MetricCard";
+import { Analytics } from "./Analytics";
 
 const formatter = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
 const currency = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
 
 export function App() {
   const [token, setToken] = useState<string | null>(localStorage.getItem("inventory-token"));
+  const [activeView, setActiveView] = useState<"operations" | "analytics">("operations");
   const [metrics, setMetrics] = useState<DashboardMetrics | null>(null);
   const [products, setProducts] = useState<Product[]>([]);
   const [recommendations, setRecommendations] = useState<ReorderRecommendation[]>([]);
@@ -76,7 +78,14 @@ export function App() {
           <span>Inventory Nexus</span>
         </div>
         <nav>
-          <a className="active">Operations</a>
+          <button className={activeView === "operations" ? "active" : ""} onClick={() => setActiveView("operations")}>
+            <PackageCheck size={17} />
+            Operations
+          </button>
+          <button className={activeView === "analytics" ? "active" : ""} onClick={() => setActiveView("analytics")}>
+            <BarChart3 size={17} />
+            Superset BI
+          </button>
           <a>Inventory</a>
           <a>Suppliers</a>
           <a>Customers</a>
@@ -85,6 +94,10 @@ export function App() {
       </aside>
 
       <section className="workspace">
+        {activeView === "analytics" ? (
+          <Analytics token={token} />
+        ) : (
+          <>
         <header className="topbar">
           <div>
             <p>Unified inventory command center</p>
@@ -176,6 +189,8 @@ export function App() {
             </div>
           </section>
         </section>
+          </>
+        )}
       </section>
     </main>
   );
