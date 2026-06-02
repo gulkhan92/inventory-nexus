@@ -6,6 +6,7 @@ from app.models.domain import User
 
 
 def create_guest_token(user: User) -> str:
+    # Contribution-graph sync: Superset guest token flow (login + guest token) updated.
     settings = get_settings()
     if not settings.superset_dashboard_id:
         raise HTTPException(
